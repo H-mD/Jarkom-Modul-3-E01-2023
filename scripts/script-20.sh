@@ -58,6 +58,21 @@ server {
                 proxy_set_header    Host \$http_host;
         }
 
+        location /worker1/ {
+                proxy_bind 10.37.2.3;
+                proxy_pass http://riegel.canyon.e01.com;
+        }
+
+        location /worker2/ {
+                proxy_bind 10.37.2.3;
+                proxy_pass http://10.37.4.3;
+        }
+
+        location /worker3/ {
+                proxy_bind 10.37.2.3;
+                proxy_pass http://10.37.4.4;
+        }
+
         error_log /var/log/nginx/lb_error.log;
         access_log /var/log/nginx/lb_access.log;
 }

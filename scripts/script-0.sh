@@ -33,7 +33,7 @@ echo -e "
 ;
 @       IN      NS      riegel.canyon.e01.com.
 @       IN      A       10.37.4.1
-www     IN      A       riegel.canyon.e01.com.
+www     IN      CNAME       riegel.canyon.e01.com.
 " > /etc/bind/e01/riegel.canyon.e01.com
 
 echo -e "
@@ -50,7 +50,7 @@ echo -e "
 ;
 @       IN      NS      granz.channel.e01.com.
 @       IN      A       10.37.3.1
-www     IN      A       granz.channel.e01.com.
+www     IN      CNAME       granz.channel.e01.com.
 " > /etc/bind/e01/granz.channel.e01.com
 
 echo -e "

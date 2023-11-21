@@ -114,6 +114,10 @@ Restart Bind9 untuk mengaktifkan konfigurasi yang sudah dibuat
 service bind9 restart
 ```
 
+### Bukti pengecekan
+
+![bukti-00](./src/bukti-00.png)
+
 ## 1 2 3 4 5
 Pengerjaan soal 2, 3, 4, dan 5 berada pada konfigurasi DHCP server dan relay
 
@@ -360,6 +364,9 @@ service nginx restart
 service php7.3-fpm start
 ```
 
+### Bukti Pengecekan
+![bukti-06](./src/bukti-06.gif)
+
 ## 7
 ### *Kepala suku dari Bredt Region memberikan resource server sebagai berikut:<br>a. Lawine, 4GB, 2vCPU, dan 80 GB SSD.<br>b. Linie, 2GB, 2vCPU, dan 50 GB SSD.<br>c. Lugner 1GB, 1vCPU, dan 25 GB SSD.<br>aturlah agar Eisen dapat bekerja dengan maksimal, lalu lakukan testing dengan 1000 request dan 100 request/second.*
 
@@ -404,55 +411,15 @@ unlink /etc/nginx/sites-enabled/default
 service nginx restart
 ```
 
+### Bukti Pengecekan
+
+![bukti-07](./src/bukti-07.gif)
+
 ### Testing
 
-Command:
-```bash
-ab -n 1000 -c 100 http://10.37.2.3:81/
-```
+Laporan Load Testing dapat dilihat pada link berikut:
 
-Result:
-```bash
-Server Software:        nginx/1.14.2
-Server Hostname:        10.37.2.3
-Server Port:            81
-
-Document Path:          /
-Document Length:        625 bytes
-
-Concurrency Level:      100
-Time taken for tests:   3.268 seconds
-Complete requests:      1000
-Failed requests:        321
-   (Connect: 0, Receive: 0, Length: 321, Exceptions: 0)
-Total transferred:      761679 bytes
-HTML transferred:       624679 bytes
-Requests per second:    305.95 [#/sec] (mean)
-Time per request:       326.846 [ms] (mean)
-Time per request:       3.268 [ms] (mean, across all concurrent requests)
-Transfer rate:          227.58 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        7   62  85.8     54    1069
-Processing:    15  200 119.5    178    1058
-Waiting:        7  196 115.4    178    1057
-Total:         30  262 146.3    239    1353
-
-Percentage of the requests served within a certain time (ms)
-  50%    239
-  66%    264
-  75%    279
-  80%    290
-  90%    317
-  95%    470
-  98%   1055
-  99%   1098
-  100%   1353 (longest request)
-```
-
-htop:
-![test-7](src/test-7.png)
+[e01_Grimoire/testing-7](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.kmebmfk5z0m7)
 
 ## 8
 ### *Karena diminta untuk menuliskan grimoire, buatlah analisis hasil testing dengan 200 request dan 10 request/second masing-masing algoritma Load Balancer dengan ketentuan sebagai berikut:<br>a. Nama Algoritma Load Balancer<br>b. Report hasil testing pada Apache Benchmark<br>c. Grafik request per second untuk masing masing algoritma.<br>d. Analisis*
@@ -464,334 +431,53 @@ ab -n 200 -c 10 http://10.37.2.3:81/
 
 ### I. Hasil Testing
 #### a. ROUND ROBIN
-```bash
-Server Software:        nginx/1.14.2
-Server Hostname:        10.37.2.3
-Server Port:            81
 
-Document Path:          /
-Document Length:        625 bytes
-
-Concurrency Level:      10
-Time taken for tests:   0.462 seconds
-Complete requests:      200
-Failed requests:        67
-   (Connect: 0, Receive: 0, Length: 67, Exceptions: 0)
-Total transferred:      152333 bytes
-HTML transferred:       124933 bytes
-Requests per second:    432.61 [#/sec] (mean)
-Time per request:       23.115 [ms] (mean)
-Time per request:       2.312 [ms] (mean, across all concurrent requests)
-Transfer rate:          321.78 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        2    5   2.0      5      14
-Processing:     4   17   4.1     16      33
-Waiting:        3   17   4.1     16      32
-Total:         16   22   4.5     21      36
-
-Percentage of the requests served within a certain time (ms)
-  50%     21
-  66%     22
-  75%     24
-  80%     26
-  90%     29
-  95%     31
-  98%     34
-  99%     36
- 100%     36 (longest request)
-```
-![test-8-rr](src/test-8-rr.png)
+[e01_Grimoire/testing-8/I/Round-Robin](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.42qg9tiyv0m1)
 
 #### b. WEIGHTED ROUND ROBIN
-```bash
-Server Software:        nginx/1.14.2
-Server Hostname:        10.37.2.3
-Server Port:            81
 
-Document Path:          /
-Document Length:        625 bytes
+[e01_Grimoire/testing-8/I/Weighted-Round-Robin](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.osy0e29po7y1)
 
-Concurrency Level:      10
-Time taken for tests:   0.508 seconds
-Complete requests:      200
-Failed requests:        64
-   (Connect: 0, Receive: 0, Length: 64, Exceptions: 0)
-Total transferred:      152336 bytes
-HTML transferred:       124936 bytes
-Requests per second:    393.84 [#/sec] (mean)
-Time per request:       25.391 [ms] (mean)
-Time per request:       2.539 [ms] (mean, across all concurrent requests)
-Transfer rate:          292.95 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        2    6   2.1      5      12
-Processing:     3   19   4.8     18      35
-Waiting:        3   19   4.8     18      35
-Total:          5   25   5.2     24      37
-
-Percentage of the requests served within a certain time (ms)
-  50%     24
-  66%     27
-  75%     28
-  80%     29
-  90%     33
-  95%     34
-  98%     36
-  99%     36
- 100%     37 (longest request)
-```
-![test-8-wrr](src/test-8-wrr.png)
 #### c. LEAST CONNECTION
-```bash
-Server Software:        nginx/1.14.2
-Server Hostname:        10.37.2.3
-Server Port:            81
 
-Document Path:          /
-Document Length:        625 bytes
+[e01_Grimoire/testing-8/I/Least-Connection](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.9qe2unw654ej)
 
-Concurrency Level:      10
-Time taken for tests:   0.465 seconds
-Complete requests:      200
-Failed requests:        60
-   (Connect: 0, Receive: 0, Length: 60, Exceptions: 0)
-Total transferred:      152340 bytes
-HTML transferred:       124940 bytes
-Requests per second:    429.78 [#/sec] (mean)
-Time per request:       23.268 [ms] (mean)
-Time per request:       2.327 [ms] (mean, across all concurrent requests)
-Transfer rate:          319.69 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        2    5   1.8      5      11
-Processing:     4   17   3.8     17      30
-Waiting:        3   17   3.7     17      30
-Total:          6   23   4.2     22      33
-
-Percentage of the requests served within a certain time (ms)
-  50%     22
-  66%     25
-  75%     25
-  80%     26
-  90%     30
-  95%     31
-  98%     32
-  99%     33
- 100%     33 (longest request)
-```
-![test-8-lc](src/test-8-lc.png)
 #### d. IP HASH
-```bash
-Server Software:        nginx/1.14.2
-Server Hostname:        10.37.2.3
-Server Port:            81
 
-Document Path:          /
-Document Length:        624 bytes
+[e01_Grimoire/testing-8/I/IP-Hash](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.pxdah2fvu2dv)
 
-Concurrency Level:      10
-Time taken for tests:   0.469 seconds
-Complete requests:      200
-Failed requests:        0
-Total transferred:      152200 bytes
-HTML transferred:       124800 bytes
-Requests per second:    426.74 [#/sec] (mean)
-Time per request:       23.433 [ms] (mean)
-Time per request:       2.343 [ms] (mean, across all concurrent requests)
-Transfer rate:          317.14 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        1    6   1.8      5      13
-Processing:     8   17   3.4     17      26
-Waiting:        0   17   3.5     17      26
-Total:         11   22   4.1     23      32
-
-Percentage of the requests served within a certain time (ms)
-  50%     23
-  66%     24
-  75%     25
-  80%     25
-  90%     27
-  95%     30
-  98%     32
-  99%     32
- 100%     32 (longest request)
-```
-![test-8-ih](src/test-8-ih.png)
 #### e. GENERIC HASH
-```bash
-Server Software:        nginx/1.14.2
-Server Hostname:        10.37.2.3
-Server Port:            81
 
-Document Path:          /
-Document Length:        624 bytes
+[e01_Grimoire/testing-8/I/IP-Hash](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.od53qydk5v9d)
 
-Concurrency Level:      10
-Time taken for tests:   0.454 seconds
-Complete requests:      200
-Failed requests:        0
-Total transferred:      152200 bytes
-HTML transferred:       124800 bytes
-Requests per second:    440.33 [#/sec] (mean)
-Time per request:       22.710 [ms] (mean)
-Time per request:       2.271 [ms] (mean, across all concurrent requests)
-Transfer rate:          327.24 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        2    5   1.8      5      10
-Processing:     3   17   4.1     16      30
-Waiting:        3   17   4.1     16      30
-Total:          5   22   4.2     23      32
-
-Percentage of the requests served within a certain time (ms)
-  50%     23
-  66%     24
-  75%     25
-  80%     26
-  90%     28
-  95%     31
-  98%     31
-  99%     32
- 100%     32 (longest request)
-```
-![test-8-gh](src/test-8-gh.png)
 ### II. Grafik
 
-![grafik](src/grafik.png)
+[e01_Grimoire/testing-8/II/Grafik](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.r3ze0vu6ay1n)
 
 ### III. Analisis
-Dari data yang didapat, algoritma terbaik didapatkan dari algoritma yang memiliki Request Per Second terbesar yaitu Generic Hash. Perlu diperhatikan bahwa tiap algoritma diuji 1 kali uji 200 request dengan kecepatan 10 request/second, sehingga hasil yang didapatkan kurang akurat dikarenakan sampel uji yang kecil dan tiap perulangan uji menghasilkan hasil yang berbeda di range 300 - 450 Request/second untuk semua algoritma.
 
+_"Dari data yang didapat, algoritma terbaik didapatkan dari algoritma yang memiliki Request Per Second terbesar yaitu Generic Hash. Perlu diperhatikan bahwa tiap algoritma diuji 1 kali uji 200 request dengan kecepatan 10 request/second, sehingga hasil yang didapatkan kurang akurat dikarenakan sampel uji yang kecil dan tiap perulangan uji menghasilkan hasil yang berbeda di range 300 - 450 Request/second untuk semua algoritma."_
+
+sumber: [e01_Grimoire/testing-8/III/Analisis](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.o53ieha6u1a3)
 
 ## 9
 ### *Dengan menggunakan algoritma Round Robin, lakukan testing dengan menggunakan 3 worker, 2 worker, dan 1 worker sebanyak 100 request dengan 10 request/second, kemudian tambahkan grafiknya pada grimoire.*
 
 ### 3 Worker
-```bash
-Server Software:        nginx/1.14.2
-Server Hostname:        10.37.2.3
-Server Port:            81
 
-Document Path:          /
-Document Length:        625 bytes
+[e01_Grimoire/testing-9/3-worker](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.pssryhxck03f)
 
-Concurrency Level:      10
-Time taken for tests:   0.235 seconds
-Complete requests:      100
-Failed requests:        33
-   (Connect: 0, Receive: 0, Length: 33, Exceptions: 0)
-Total transferred:      76167 bytes
-HTML transferred:       62467 bytes
-Requests per second:    425.08 [#/sec] (mean)
-Time per request:       23.525 [ms] (mean)
-Time per request:       2.353 [ms] (mean, across all concurrent requests)
-Transfer rate:          316.18 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        1    5   1.7      5       9
-Processing:     6   18   7.1     16      41
-Waiting:        4   17   7.1     15      41
-Total:          9   22   6.4     20      43
-
-Percentage of the requests served within a certain time (ms)
-  50%     20
-  66%     23
-  75%     24
-  80%     26
-  90%     36
-  95%     39
-  98%     42
-  99%     43
- 100%     43 (longest request)
-```
-![test-9-3](src/test-9-3.png)
 ### 2 Worker
-```bash
-Server Software:        nginx/1.14.2
-Server Hostname:        10.37.2.3
-Server Port:            81
 
-Document Path:          /
-Document Length:        624 bytes
+[e01_Grimoire/testing-9/2-worker](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.8no2zvo8jhps)
 
-Concurrency Level:      10
-Time taken for tests:   0.251 seconds
-Complete requests:      100
-Failed requests:        50
-   (Connect: 0, Receive: 0, Length: 50, Exceptions: 0)
-Total transferred:      76150 bytes
-HTML transferred:       62450 bytes
-Requests per second:    398.53 [#/sec] (mean)
-Time per request:       25.092 [ms] (mean)
-Time per request:       2.509 [ms] (mean, across all concurrent requests)
-Transfer rate:          296.37 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        1    5   2.2      5      12
-Processing:     4   19   3.9     18      27
-Waiting:        3   19   3.9     18      27
-Total:          6   24   4.3     23      32
-
-Percentage of the requests served within a certain time (ms)
-  50%     23
-  66%     27
-  75%     27
-  80%     28
-  90%     30
-  95%     31
-  98%     32
-  99%     32
- 100%     32 (longest request)
-```
-![test-9-2](src/test-9-2.png)
 ### 1 Worker
-```bash
-Server Software:        nginx/1.14.2
-Server Hostname:        10.37.2.3
-Server Port:            81
 
-Document Path:          /
-Document Length:        624 bytes
+[e01_Grimoire/testing-9/1-worker](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.jfxlbgu1h1e)
 
-Concurrency Level:      10
-Time taken for tests:   0.276 seconds
-Complete requests:      100
-Failed requests:        0
-Total transferred:      76100 bytes
-HTML transferred:       62400 bytes
-Requests per second:    362.97 [#/sec] (mean)
-Time per request:       27.550 [ms] (mean)
-Time per request:       2.755 [ms] (mean, across all concurrent requests)
-Transfer rate:          269.75 [Kbytes/sec] received
+### Grafik
 
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        2    7   3.2      6      18
-Processing:     5   20   4.6     19      38
-Waiting:        4   20   4.6     19      37
-Total:          7   26   5.4     25      41
-
-Percentage of the requests served within a certain time (ms)
-  50%     25
-  66%     27
-  75%     29
-  80%     31
-  90%     36
-  95%     37
-  98%     41
-  99%     41
- 100%     41 (longest request)
-```
-![test-9-1](src/test-9-1.png)
+[e01_Grimoire/testing-9/Grafik](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.rfxd6rawyz3b)
 
 ## 10
 ### *Selanjutnya coba tambahkan konfigurasi autentikasi di LB dengan dengan kombinasi username: “netics” dan password: “ajkyyy”, dengan yyy merupakan kode kelompok. Terakhir simpan file “htpasswd” nya di /etc/nginx/rahasisakita/*
@@ -826,6 +512,10 @@ Restart nginx untuk mengaktifkan konfigurasi yang sudah ditambahkan
 service nginx restart
 ```
 
+### Bukti Pengecekan
+
+![bukti-10](./src/bukti-10.gif)
+
 ## 11
 ### *Lalu buat untuk setiap request yang mengandung /its akan di proxy passing menuju halaman https://www.its.ac.id.*
 
@@ -846,6 +536,10 @@ Restart nginx untuk mengaktifkan konfigurasi yang sudah ditambahkan
 ```bash
 service nginx restart
 ```
+
+### Bukti Pengecekan
+
+![bukti-11](./src/bukti-11.gif)
 
 ## 12
 ### *Selanjutnya LB ini hanya boleh diakses oleh client dengan IP [Prefix IP].3.69, [Prefix IP].3.70, [Prefix IP].4.167, dan [Prefix IP].4.168.*
@@ -873,6 +567,10 @@ Restart nginx untuk mengaktifkan konfigurasi yang sudah ditambahkan
 ```bash
 service nginx restart
 ```
+
+### Bukti Pengecekan
+
+![bukti-12](./src/bukti-12.gif)
 
 ## 13
 ### *Semua data yang diperlukan, diatur pada Denken dan harus dapat diakses oleh Frieren, Flamme, dan Fern.*
@@ -1092,20 +790,24 @@ service php8.0-fpm start
 service nginx restart
 ```
 
+### Bukti Pengecekan
+
+![bukti-14](./src/bukti-14.gif)
+
 ## 15 16 17
 ### *Riegel Channel memiliki beberapa endpoint yang harus ditesting sebanyak 100 request dengan 10 request/second. Tambahkan response dan hasil testing pada grimoire.*
 
 ### 15. *POST /auth/register*
-![test-15-a](src/test-15-a.png)
-![test-15-b](src/test-15-b.png)
+
+[e01_Grimoire/testing-15](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.ha0et0b3ih9u)
 
 ### 16. *POST /auth/login*
-![test-16-a](src/test-16-a.png)
-![test-16-b](src/test-16-b.png)
+
+[e01_Grimoire/testing-16](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.vzgx16qc0smd)
 
 ### 17. *GET /me*
-![test-17-a](src/test-17-a.png)
-![test-17-b](src/test-17-b.png)
+
+[e01_Grimoire/testing-17](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.1dstonolc85t)
 
 ## 18
 ### *Untuk memastikan ketiganya bekerja sama secara adil untuk mengatur Riegel Channel maka implementasikan Proxy Bind pada Eisen untuk mengaitkan IP dari Frieren, Flamme, dan Fern.*
@@ -1179,6 +881,10 @@ Restart nginx untuk mengaktifkan konfigurasi yang sudah ditambahkan
 service nginx restart
 ```
 
+### Bukti Pengecekan
+
+![bukti-18](./src/bukti-18.gif)
+
 ## 19
 ### *Untuk meningkatkan performa dari Worker, coba implementasikan PHP-FPM pada Frieren, Flamme, dan Fern. Untuk testing kinerja naikkan <br>- pm.max_children<br>- pm.start_servers<br>- pm.min_spare_servers<br>- pm.max_spare_servers<br>sebanyak tiga percobaan dan lakukan testing sebanyak 100 request dengan 10 request/second kemudian berikan hasil analisisnya pada Grimoire.*
 
@@ -1236,40 +942,21 @@ service nginx restart
 ### Testing
 
 #### 1. 
-```bash
-pm.max_children = 75
-pm.start_servers = 10
-pm.min_spare_servers = 5
-pm.max_spare_servers = 20
-pm.process_idle_timeout = 10s
-```
-![test-19-1-a](src/test-19-1-a.png)
-![test-19-1-b](src/test-19-1-b.png)
+
+[e01_Grimoire/testing-19/1](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.mrzzb4z8afnj)
 
 #### 2. 
-```bash
-pm.max_children = 85
-pm.start_servers = 20
-pm.min_spare_servers = 15
-pm.max_spare_servers = 30
-pm.process_idle_timeout = 20s
-```
-![test-19-2-a](src/test-19-2-a.png)
-![test-19-2-b](src/test-19-2-b.png)
+
+[e01_Grimoire/testing-19/2](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.l35pjkqd7314)
 
 #### 3. 
-```bash
-pm.max_children = 95
-pm.start_servers = 30
-pm.min_spare_servers = 25
-pm.max_spare_servers = 40
-pm.process_idle_timeout = 30s
-```
-![test-19-3-a](src/test-19-3-a.png)
-![test-19-3-b](src/test-19-3-b.png)
+
+[e01_Grimoire/testing-19/3](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.gnylu8sl6ngi)
 
 #### Analisa
-Dari data yang didapatkan, dapat disimpulkan bahwa semakin besar konfigurasi max_children, start_Servers, spare_servers, dan process_idle_timeout, maka semakin cepat pula rata-rata request time tiap worker, tetapi jika tidak dibarengi dengan spesifikasi yang memadai maka akan berbanding terbalik.
+_"Secara teori, semakin besar value konfigurasi fpm yang ditentukan maka Request Per Second akan semakin besar, tetapi dari data yang didapatkan, hal ini berbanding terbalik dikarenakan process_idle_timeout ikut bertambah seiring bertambahnya konfigurasi lain yang menyebabkan hasil Request Per Second semakin kecil."_
+
+sumber: [e01_Grimoire/testing-19/analisis](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.o5ulkoesctfg)
 
 ## 20
 ### *Nampaknya hanya menggunakan PHP-FPM tidak cukup untuk meningkatkan performa dari worker maka implementasikan Least-Conn pada Eisen. Untuk testing kinerja dari worker tersebut dilakukan sebanyak 100 request dengan 10 request/second.*
@@ -1297,5 +984,9 @@ service nginx restart
 
 ### Testing
 
-![test-19-3-a](src/test-20-a.png)
-![test-19-3-b](src/test-20-b.png)
+Dari hasil testing berikut:
+
+[e01_Grimoire/testing-20](https://docs.google.com/document/d/1zOLhUjCq4XP3cVdAw3ziiaPz9WUXaViw4doPoGYnwpw/edit#heading=h.rxzjd88oxa5o)
+
+Didapatkan efek dari Perubahan algoritma Load Balancing dari Round Robin menjadi Least Connection pada Request Time per Second sebanyak +0.77
+
