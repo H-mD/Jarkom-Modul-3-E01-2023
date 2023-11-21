@@ -7,7 +7,7 @@
 10.37.X.X
 
 ## Topology
-![topology](src/topology.png)
+![topology](./src/topology.png)
 
 ## Ketentuan Node
 Node | Kategori | Image Docker | Konfigurasi IP
